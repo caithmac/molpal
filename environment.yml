@@ -1,22 +1,24 @@
-name: molpal
+name: molpal_new
 
 channels:
+  - nvidia
+  - pytorch
   - conda-forge
   - defaults
 
 dependencies:
-  - cudatoolkit=11.3
-  - python=3.8
-  - pytorch::pytorch >=1.10
+  - python=3.9
+  - pytorch=1.13.1
+  - pytorch-cuda=11.7
   - pip
   - pip:
     - configargparse
     - h5py
     - numpy
-    - ray >= 1.11
+    - ray >= 1.11,<2.0
     - ray[tune]
     - rdkit
-    - pytorch-lightning
+    - pytorch-lightning == 1.5.10
     - scikit-learn
     - tensorflow
     - tensorflow-addons

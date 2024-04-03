@@ -14,6 +14,7 @@ from pytorch_lightning import Trainer as PlTrainer
 from pytorch_lightning.callbacks.early_stopping import EarlyStopping
 import ray
 from ray.train import Trainer as RayTrainer
+#from ray.air import Trainer as RayTrainer
 import torch
 from tqdm import tqdm
 

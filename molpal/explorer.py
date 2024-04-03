@@ -205,8 +205,50 @@ class Explorer:
         """The directory containing all automated output of this Explorer"""
         return self.__path
 
+    #@path.setter
+    """"def path(self, path: Union[str, Path]):
+        self.__path = Path(path)
+        self.__path.mkdir(parents=True, exist_ok=True)"""
+    #Changes made here because of following error
+    
+    """Based on the traceback, the `TypeError` is occurring in the `pathlib` module when trying to create a `Path` object from the `path` argument passed to the `Explorer` class. Specifically, the line `self.__path = Path(path)` in the `path` setter method of the `Explorer` class is causing the error.
+
+The error message `expected str, bytes or os.PathLike object, not NoneType` suggests that the `path` argument passed to the `Explorer` class is `None`, which is not a valid argument for the `Path` constructor.
+
+To fix this issue, you need to ensure that the `path` argument passed to the `Explorer` class is a valid string or path-like object representing a valid file path. If the `path` is intended to be optional or can be `None`, you should add a check for `None` in the `path` setter method and handle that case appropriately.
+
+For example, you could modify the `path` setter method as follows:
+
+```python
+@path.setter
+def path(self, path: Union[str, Path]):
+    if path is None:
+        # Handle the case where path is None
+        self.__path = Path.cwd()  # Use the current working directory
+    else:
+        self.__path = Path(path)
+    self.__path.mkdir(parents=True, exist_ok=True)
+```
+
+This modification checks if the `path` argument is `None`. If it is, it sets `self.__path` to the current working directory using `Path.cwd()`. If `path` is not `None`, it creates a `Path` object from the provided `path` argument.
+
+Alternatively, you could raise a more informative error if `path` is `None` and it's not intended to be a valid value:
+
+```python
+@path.setter
+def path(self, path: Union[str, Path]):
+    if path is None:
+        raise ValueError("Path cannot be None")
+    self.__path = Path(path)
+    self.__path.mkdir(parents=True, exist_ok=True)
+```
+
+This way, if `path` is `None`, it will raise a `ValueError` with a meaningful error message, instead of the generic `TypeError` from the `pathlib` module."""
+    
     @path.setter
     def path(self, path: Union[str, Path]):
+        if path is None:
+            raise ValueError("Path cannot be None")
         self.__path = Path(path)
         self.__path.mkdir(parents=True, exist_ok=True)
 
